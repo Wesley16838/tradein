@@ -51,6 +51,17 @@ class OrderList extends Component {
     }
 
     render() {
+        var compare = (o1, o2) => {
+            let a = Math.sqrt(((this.state.lat - o1.user.Lat) * (this.state.lat - o1.user.Lat)) + ((this.state.long - o1.user.Long_) * (this.state.long - o1.user.Long_)));
+            let b = Math.sqrt(((this.state.lat - o2.user.Lat) * (this.state.lat - o2.user.Lat)) + ((this.state.long - o2.user.Long_) * (this.state.long - o2.user.Long_)));
+            if (a > b) return 1;
+            if (b > a) return -1;
+          
+            return 0;
+        };
+
+        this.state.data.sort(compare);
+
         return (
             <div>
                 <h1>Current Loaction:</h1>

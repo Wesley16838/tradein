@@ -40,7 +40,7 @@ class OrderList extends Component {
             url: 'http://localhost:3001/get_all_orders',
             type: 'GET',
             success: function (res) {
-                alert('complete!')
+                // alert('complete!')
                 console.log(res);
                 this.setState({
                     info: "completed",

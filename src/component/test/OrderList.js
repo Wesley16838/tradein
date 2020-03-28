@@ -55,8 +55,8 @@ class OrderList extends Component {
 
     render() {
         var compare = (o1, o2) => {
-            let a = Math.sqrt(((this.state.lat - o1.user.Lat) * (this.state.lat - o1.user.Lat)) + ((this.state.long - o1.user.Long_) * (this.state.long - o1.user.Long_)));
-            let b = Math.sqrt(((this.state.lat - o2.user.Lat) * (this.state.lat - o2.user.Lat)) + ((this.state.long - o2.user.Long_) * (this.state.long - o2.user.Long_)));
+            let a = Math.sqrt(((this.state.lat - o1.user.location.coordinates[1]) * (this.state.lat - o1.user.location.coordinates[1])) + ((this.state.long - o1.user.location.coordinates[0]) * (this.state.long - o1.user.location.coordinates[0])));
+            let b = Math.sqrt(((this.state.lat - o2.user.location.coordinates[1]) * (this.state.lat - o2.user.location.coordinates[1])) + ((this.state.long - o2.user.location.coordinates[0]) * (this.state.long - o2.user.location.coordinates[0])));
             if (a > b) return 1;
             if (b > a) return -1;
           
@@ -69,7 +69,7 @@ class OrderList extends Component {
             <div>
                 <h1>Current Loaction:</h1>
                 <h1>[{this.state.lat} , {this.state.long}]</h1>
-                {this.state.data.map(order => <Order key={order._id} order={order} />)}
+                {this.state.data.map(order => <Order key={order._id} order={order} dis={Math.sqrt(((this.state.lat - order.user.location.coordinates[1]) * (this.state.lat - order.user.location.coordinates[1])) + ((this.state.long - order.user.location.coordinates[0]) * (this.state.long - order.user.location.coordinates[0])))}/>)}
             </div>
         )
     }

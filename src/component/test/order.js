@@ -12,7 +12,8 @@ class Order extends Component {
         return (
             <div>
                 <h2>Post by: {this.state.data.user.username}</h2>
-                <h4>Poster Location: [{this.state.data.user.Lat},{this.state.data.user.Long_}]</h4>
+                <h4>Poster Location: [{this.state.data.user.location.coordinates[1]},{this.state.data.user.location.coordinates[0]}]</h4>
+                <h5>Distance: {this.props.dis}</h5>
                 <h4>Offer Product: {this.state.data.prod}</h4>
                 <h4>Quantity: {this.state.data.amt}</h4>
                 <h4>Desired Product: {this.state.data.wish}</h4>

@@ -23,6 +23,9 @@ class Order extends Component {
 
                 <h5>Opining Status: {this.state.data.status}</h5>
                 <h5>Reserved By: {this.state.data.reserved_by_user==undefined ? "None" : this.state.data.reserved_by_user.username}</h5>
+                <br/>
+                <h5>Last updated: {this.state.data.last_updated} </h5>
+                <br/>
             </div>
         )
     }

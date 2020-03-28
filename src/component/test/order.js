@@ -22,7 +22,7 @@ class Order extends Component {
                 <h4>{this.state.data.user.email}</h4>
 
                 <h5>Opining Status: {this.state.data.status}</h5>
-                <h5>Reserved By: {this.state.data.reserved_by}</h5>
+                <h5>Reserved By: {this.state.data.reserved_by_user==undefined ? "None" : this.state.data.reserved_by_user.username}</h5>
             </div>
         )
     }

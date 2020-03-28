@@ -46,7 +46,10 @@ class OrderList extends Component {
                     info: "completed",
                     data: res
                 })
-            }.bind(this)
+            }.bind(this),
+            error: function (e) {
+                console.log(e);
+            }
         });
     }
 

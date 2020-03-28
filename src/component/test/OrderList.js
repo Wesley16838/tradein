@@ -36,6 +36,7 @@ class OrderList extends Component {
             // get your location some other way
             console.log('geolocation is not enabled on this browser')
         }
+        
         $.ajax({
             url: 'http://localhost:3001/get_all_orders',
             type: 'GET',

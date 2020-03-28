@@ -1,6 +1,7 @@
 import app from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firebase-firestore'
+import 'firebase/storage'
 const config = {
     apiKey: "AIzaSyBZLaJ86GFtjdcAH79eEOpXmKXa-1JEbYg",
     authDomain: "hackathon-covid.firebaseapp.com",
@@ -17,6 +18,7 @@ class Firebase {
 		app.initializeApp(config)
 		this.auth = app.auth()
 		this.db = app.firestore()
+		this.storage = app.storage()
 	}
 
 	login(email, password) {
@@ -58,6 +60,10 @@ class Firebase {
 	async getCurrentUserQuote() {
 		const quote = await this.db.doc(`users_codedamn_video/${this.auth.currentUser.uid}`).get()
 		return quote.get('quote')
+	}
+
+	async getImage(filename) {
+		return await app.storage().ref('prod').child(`${filename}`).getDownloadURL();
 	}
 }
 

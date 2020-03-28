@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState,useContext}from 'react';
+import { BrowserRouter as Router, Switch, Route ,Redirect} from "react-router-dom"
 import './App.css';
 
+//components
+import Header from './component/header'
+import Landing from './component/pages/landing'
+import Signinpage from './component/pages/signinPage'
+import Homepage from './component/pages/home'
+import PrivateRoute from './component/privateRoute'
+//includes
+import './Assets/css/styles.min.css'//css file
+
+export const AuthContext = React.createContext(null);
+
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  return(
+    <AuthContext.Provider value={{ isLoggedIn, setLoggedIn }}>
+      <Router>
+        <div className="App">
+          <Header/>
+          <Switch>
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/signin" component={Signinpage} />
+            <PrivateRoute exact path="/home" component={Homepage} /> 
+          </Switch>
+
+        </div>
+      </Router> 
+   </AuthContext.Provider>
+  )
+  
 }
 
 export default App;

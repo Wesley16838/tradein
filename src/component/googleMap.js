@@ -56,6 +56,7 @@ import Marker from './test/Marker'
 const SimpleMap = (props) => {
   const [center, setCenter] = useState({ lat: 11.0168, lng: 76.9558 });
   const [zoom, setZoom] = useState(15);
+  const [visible , setVisible] = useState(false)
   useEffect(() => {
     console.log('data in map')
     console.log(props.data)
@@ -66,6 +67,7 @@ const SimpleMap = (props) => {
           // for when getting location is a success
           console.log('latitude', position.coords.latitude, 'longitude', position.coords.longitude);
           setCenter({ lat: position.coords.latitude, lng: position.coords.longitude })
+          setVisible(true)
         },
         function error(error_message) {
           // for when getting location results in an error
@@ -83,10 +85,13 @@ const SimpleMap = (props) => {
 
   return (
     <div style={{ height: '100vh', width: '100%' }}>
+      {visible ? 
       <GoogleMapReact bootstrapURLKeys={{ key: 'AIzaSyDH5dYz6E-fTRewEqrtSlF6fVveBarE38Y' }} defaultCenter={center} defaultZoom={zoom}>
         <Marker lat={center.lat} lng={center.lng} text="My Marker" color="blue"/>
         {props.data.map(order => <Marker lat={order.user.location.coordinates[1]}  lng={order.user.location.coordinates[0]} text="My Marker" color="red"/>)}
-      </GoogleMapReact>
+      </GoogleMapReact> : 
+      <p>Please refresh page</p>
+      }
     </div>
   );
 }

@@ -27,7 +27,7 @@ h4 {
 
 header {
   height: 100px;
-  position: relative;
+  position: fixed;
   display: flex;
   align-items: center;
   width: 100%;
@@ -308,6 +308,104 @@ input[type=search]:focus {
 
 #expandSearch input::-webkit-input-placeholder {
   color: transparent; }
+
+.homeContainer {
+  display: flex;
+  flex-direction: row; }
+  .homeContainer .map {
+    width: calc(100% - 840px);
+    position: fixed;
+    right: 0; }
+  .homeContainer .orderList {
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    .homeContainer .orderList .orders {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0em 1em;
+      width: 100%; }
+      .homeContainer .orderList .orders li {
+        list-style-type: none; }
+      .homeContainer .orderList .orders .order {
+        display: flex;
+        flex-direction: row;
+        height: 350px;
+        width: 100%;
+        background-color: #fff;
+        margin: 1em 0em;
+        padding: 1em;
+        box-sizing: border-box;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+        .homeContainer .orderList .orders .order .upperdetail {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          width: 100%; }
+          .homeContainer .orderList .orders .order .upperdetail .orderDetail {
+            text-align: left; }
+            .homeContainer .orderList .orders .order .upperdetail .orderDetail .userInfo {
+              display: flex;
+              align-items: center; }
+              .homeContainer .orderList .orders .order .upperdetail .orderDetail .userInfo .detail {
+                display: flex;
+                justify-content: flex-start;
+                flex-direction: column;
+                text-align: left; }
+                .homeContainer .orderList .orders .order .upperdetail .orderDetail .userInfo .detail .prodUsername {
+                  font-size: 1.5rem;
+                  font-weight: bold; }
+                .homeContainer .orderList .orders .order .upperdetail .orderDetail .userInfo .detail .prodTime {
+                  font-size: .8rem;
+                  color: #a0a0a0; }
+                .homeContainer .orderList .orders .order .upperdetail .orderDetail .userInfo .detail p {
+                  margin: 0px; }
+              .homeContainer .orderList .orders .order .upperdetail .orderDetail .userInfo .profileImage {
+                width: 30px;
+                height: 30px;
+                margin-right: 10px; }
+            .homeContainer .orderList .orders .order .upperdetail .orderDetail .tradeContent {
+              display: flex;
+              align-items: center;
+              justify-content: space-between; }
+              .homeContainer .orderList .orders .order .upperdetail .orderDetail .tradeContent img {
+                width: 30px; }
+              .homeContainer .orderList .orders .order .upperdetail .orderDetail .tradeContent .prodName {
+                margin: 0px;
+                font-weight: bold; }
+              .homeContainer .orderList .orders .order .upperdetail .orderDetail .tradeContent .prodAmount {
+                margin: 0px;
+                color: #a0a0a0; }
+            .homeContainer .orderList .orders .order .upperdetail .orderDetail .prodDescription {
+              text-align: left; }
+        .homeContainer .orderList .orders .order .prodImage {
+          display: flex;
+          align-items: center;
+          justify-content: center; }
+          .homeContainer .orderList .orders .order .prodImage img {
+            width: 280px; }
+
+.tabPanel {
+  background-color: #f7f7f7; }
+
+.requestForm {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  box-sizing: border-box;
+  padding: 1em;
+  border-radius: 5px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+  .requestForm .extraContent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around; }
+  .requestForm input[name="description"] {
+    border: none; }
+    .requestForm input[name="description"]::before {
+      content: '';
+      background-image: url("../img/profileImage.png"); }
 
 /*Vars*/
 /*RWD*/

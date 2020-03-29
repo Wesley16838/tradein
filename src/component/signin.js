@@ -4,6 +4,7 @@ import {
 } from 'react-router-dom'
 import firebase from "../firebase";
 import { AuthContext } from "./../App";
+import axios from 'axios'
 function Login(props) {
     const Auth = useContext(AuthContext);
     const handleForm = e => {
@@ -56,6 +57,9 @@ function Login(props) {
     async function login() {
       try {
         await firebase.login(email, password)
+        let user = await axios.get('http://localhost:3007/get_user_by_email?email='+email)   
+        console.log('user, ',user)
+        localStorage.setItem('userId',user.data._id)
         props.history.replace('/home')
       } catch(error) {
         alert(error.message)

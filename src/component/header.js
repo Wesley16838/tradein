@@ -28,14 +28,7 @@ function Header(props) {
                   
                   {
                       isLoggedIn
-                      ? <div className="dropdown">
-                          <button className="basicBtn">Account &#38; Lists</button>
-                          <div className="dropdown-content">
-                            <Link  to='/account'>Manage account</Link> 
-                            <Link  to='/home'>Your Panels</Link> 
-                            <Link  to='/' onClick={logout}>Log Out</Link> 
-                          </div>
-                        </div>
+                      ? <Link className="basicBtn" to='/' onClick={logout}>Log Out</Link> 
                       : <Link className="basicBtn" to='/signin' >Sign In</Link> 
                   }
                     

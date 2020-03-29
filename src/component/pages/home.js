@@ -12,6 +12,8 @@ import Box from '@material-ui/core/Box';
 import Map from './../googleMap'
 import GlobalOrder from './../globalOrder'
 import PostRequest from './../postRequest'
+import AllPending from '../pending'
+import AllComplete from '../Complete'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -102,10 +104,10 @@ function Homepage() {
           <GlobalOrder order={data} />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Item Two
+          <AllPending/>
         </TabPanel>
         <TabPanel value={value} index={2}>
-          Item Three
+          <AllComplete />
         </TabPanel>
        
       </div>

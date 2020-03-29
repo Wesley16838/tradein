@@ -9,7 +9,7 @@ function PostRequest() {
     const onSubmit = async values => {
 
         console.log(values);
-        var result = await axios.post('http://localhost:3007/add_order',{
+        var result = await axios.post('http://localhost:3001/add_order',{
             userId: '5e7f9708ba65143aa8a0f13b',
             prod: values.product,
             amt: values.prodAmount,

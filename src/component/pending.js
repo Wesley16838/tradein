@@ -6,11 +6,12 @@ import profileImage from './../Assets/img/profileImage.png'
 import refresh from './../Assets/img/Refresh.png'
 
 function AllPending(props) {
+    console.log("in all pending" , localStorage.getItem('userId'))
     const [data , setData] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
-          const result = await axios('http://localhost:3001/get_pending_by_user&userId='+localStorage.getItem("userId"));
-          console.log('result,',result)
+          const result = await axios('http://localhost:3001/get_pending_by_user?userId='+localStorage.getItem('userId'));
+          console.log('result in pending,',result)
           setData(result.data);
         };
         fetchData();
@@ -49,7 +50,7 @@ function AllPending(props) {
                                       </div>
                                       <p>{item.description}</p>
                                   </div>
-                                  <button className='basicBtn' onClick={e => handleclick(item)}>Help</button>
+                                  <button className='basicBtn'>Help</button>
                           </div>
                          
                           

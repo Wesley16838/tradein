@@ -109,15 +109,16 @@ footer{
 }
 .basicBtn{
     color:$white;
-    background-image:  linear-gradient(to right, #eb3941, #f15e64, #e14e53, #e2373f);
+    // background-image:  linear-gradient(to right, #eb3941, #f15e64, #e14e53, #e2373f);
+    background:#DE3E35;
     padding:15px 60px;
     font-size:16px;
     // @include transition(.2s ease);
     background-size: 300% 100%;
-    transition: all .4s ease-in-out;
+    transition: all .2s ease-in-out;
     &:hover{
-      background-position: 100% 0;
-      transition: all .4s ease-in-out;
+      background:rgb(179, 43, 36);
+      // transition: all .4s ease-in-out;
     }
 }
 .basicBtn_reverse{

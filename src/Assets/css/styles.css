@@ -113,14 +113,13 @@ footer {
 
 .basicBtn {
   color: #fff;
-  background-image: linear-gradient(to right, #eb3941, #f15e64, #e14e53, #e2373f);
+  background: #DE3E35;
   padding: 15px 60px;
   font-size: 16px;
   background-size: 300% 100%;
-  transition: all .4s ease-in-out; }
+  transition: all .2s ease-in-out; }
   .basicBtn:hover {
-    background-position: 100% 0;
-    transition: all .4s ease-in-out; }
+    background: #b32b24; }
 
 .basicBtn_reverse {
   color: #2B64FF;
@@ -397,15 +396,34 @@ input[type=search]:focus {
   padding: 1em;
   border-radius: 5px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+  .requestForm .form-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1em 0em; }
   .requestForm .extraContent {
     display: flex;
     flex-direction: row;
-    justify-content: space-around; }
-  .requestForm input[name="description"] {
-    border: none; }
-    .requestForm input[name="description"]::before {
-      content: '';
-      background-image: url("../img/profileImage.png"); }
+    justify-content: space-between; }
+  .requestForm textarea[name="description"] {
+    border: none;
+    width: 100%;
+    height: 50px; }
+
+.marker {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  background-color: #000;
+  border: 2px solid #fff;
+  border-radius: 100%;
+  user-select: none;
+  transform: translate(-50%, -50%); }
+  .marker:hover {
+    z-index: 1; }
 
 /*Vars*/
 /*RWD*/

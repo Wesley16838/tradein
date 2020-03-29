@@ -1,30 +1,17 @@
-import React,{useState, useEffect} from 'react';
+import React,{useState, useEffect,useContext} from 'react';
 import { withRouter } from 'react-router-dom';
-import Spinner from 'react-bootstrap/Spinner';
 import axios from 'axios';
 import noImage from './../Assets/img/noImage.png'
 import profileImage from './../Assets/img/profileImage.png'
 import refresh from './../Assets/img/Refresh.png'
-function GlobalOrder() {
-    const [data, setData] = useState([]);
-    const [showLoading, setShowLoading] = useState(true);
-    useEffect(() => {
-        const fetchData = async () => {
-          const result = await axios('http://localhost:3007/get_all_orders');
-          setData(result.data);
-          setShowLoading(false);
-        };
-      
-        fetchData();
-      }, []);
+function GlobalOrder(props) {
     
     return(
+       
           <div className="orderList">
-               {showLoading && <Spinner animation="border" role="status">
-                    <span>Loading...</span>
-                </Spinner> }
+             
              <ul className="orders" >
-             {data.map((item, idx) => {
+             {props.order.map((item, idx) => {
                  if(item.image == null){
                     return (<li className="order" key={idx}>
                            
@@ -77,7 +64,7 @@ function GlobalOrder() {
              })}
              </ul>
           </div>
-
+ 
     )
   
 }

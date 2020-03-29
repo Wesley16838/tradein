@@ -1,32 +1,44 @@
-import React,{useState, useEffect} from 'react';
+import React,{useState, useEffect,useContext} from 'react';
 import { withRouter } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 import profileImage from './../Assets/img/profileImage.png'
-import $ from 'jquery'
 function PostRequest() {
-    const { handleSubmit, register, errors } = useForm();
-    const onSubmit = values => {
+    const { handleSubmit, register, reset,errors } = useForm();
+    const [dummy, reload] = useState(false);
+    const onSubmit = async values => {
+
         console.log(values);
+        var result = await axios.post('http://localhost:3007/add_order',{
+            userId: '5e7f9708ba65143aa8a0f13b',
+            prod: values.product,
+            amt: values.prodAmount,
+            wish:values.wishProduct,
+            wish_amt:values.wishAmount,
+            description:values.description
+          })
+        //   reset() 
+        window.location.reload(!dummy);
     };
     
   return (
-    <form className='requestForm' onSubmit={handleSubmit(onSubmit)}>
+ 
+             <form className='requestForm' onSubmit={handleSubmit(onSubmit)}>
         <div className="form-group">
             <label htmlFor='description' className='reqDescription'></label>
-            <input
-                type='text'
-                name="description"
-                autoComplete='off'
-                placeholder='What&apos;s your request'
-                ref={register({
+            <textarea  
+            placeholder='What&apos;s your request' 
+            autoComplete='off' 
+            name="description" 
+            ref={register({
                 required: 'Required',
                 pattern: {
-                    message: "invalid words"
+                    message: "invalid product name"
                 }
                 })}
-            />
-            {errors.description && errors.description.message}
+            >
+
+            </textarea>
         </div>
         <div className='extraContent'>
             <div className='reqProdGroup'>
@@ -98,7 +110,8 @@ function PostRequest() {
           
         </div>
         <button className='basicBtn' type="submit">Submit</button>
-    </form>
+        </form>
+ 
   );
   
 }

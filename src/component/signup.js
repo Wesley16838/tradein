@@ -13,7 +13,6 @@ function Signup(props) {
  
     const handleForm = e => {
       e.preventDefault();
-      console.log(Auth);
       Auth.setLoggedIn(true);
 
     };
@@ -98,7 +97,6 @@ function Signup(props) {
     async function onRegister(){
       try{
         await firebase.register(username, email, password)
-        console.log('lat,',lat)
         let user = await axios.post('http://localhost:3007/add_user',{
           username:username,
           password:password,
@@ -106,7 +104,6 @@ function Signup(props) {
           Lat:lat,
           Long_:lng
         })   
-        console.log('user, ',user)
         localStorage.setItem('userId',user.data._id)
         props.history.push('/home')
       }catch(e){

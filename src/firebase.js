@@ -46,7 +46,6 @@ class Firebase {
 
 
 	isInitialized() {
-		console.log('initialize')
 		return new Promise(resolve => {
 			this.auth.onAuthStateChanged(resolve)
 		})

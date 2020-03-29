@@ -75,12 +75,10 @@ function Homepage() {
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios('http://localhost:3007/get_all_orders');
-      console.log('result,',result)
       setData(result.data);
     };
     fetchData();
   }, []);
-  useEffect(() => { console.log(data) }, [data])
   return (
     
     <div className='homeContainer'>

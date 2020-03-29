@@ -37,7 +37,6 @@ class Googlemap extends Component {
     render() {
   
       if(this.props.lat === '' && this.props.lng === ''){
-        console.log('location not exist')
         return (
           
             <Map
@@ -54,7 +53,6 @@ class Googlemap extends Component {
           
       );
       }else{
-        console.log('location exist')
         return (
           
             <Map

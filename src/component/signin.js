@@ -9,7 +9,6 @@ function Login(props) {
     const Auth = useContext(AuthContext);
     const handleForm = e => {
       e.preventDefault();
-      console.log(Auth);
       Auth.setLoggedIn(true);
     };
     const [email, setEmail] = useState("");
@@ -58,7 +57,6 @@ function Login(props) {
       try {
         await firebase.login(email, password)
         let user = await axios.get('http://localhost:3007/get_user_by_email?email='+email)   
-        console.log('user, ',user)
         localStorage.setItem('userId',user.data._id)
         props.history.replace('/home')
       } catch(error) {

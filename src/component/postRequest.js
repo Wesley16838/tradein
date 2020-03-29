@@ -17,6 +17,7 @@ function PostRequest() {
             wish_amt:values.wishAmount,
             description:values.description
           })
+          console.log(result)
         //   reset() 
         window.location.reload(!dummy);
     };

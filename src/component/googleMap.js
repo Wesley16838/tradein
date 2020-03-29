@@ -52,6 +52,7 @@
 import React, { useState , useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
 import Marker from './test/Marker'
+import env from '../env.json'
 
 const SimpleMap = (props) => {
   const [center, setCenter] = useState({ lat: 11.0168, lng: 76.9558 });
@@ -82,11 +83,11 @@ const SimpleMap = (props) => {
   }, []);
 
 
-
+  console.log('env in googlemap',env.REACT_APP_GoogleMap_API_KEY)
   return (
     <div style={{ height: '100vh', width: '100%' }}>
       {visible ? 
-      <GoogleMapReact bootstrapURLKeys={{ key: 'AIzaSyDH5dYz6E-fTRewEqrtSlF6fVveBarE38Y' }} defaultCenter={center} defaultZoom={zoom}>
+      <GoogleMapReact bootstrapURLKeys={{ key: env.REACT_APP_GoogleMap_API_KEY }} defaultCenter={center} defaultZoom={zoom}>
         <Marker lat={center.lat} lng={center.lng} text="My Marker" color="blue"/>
         {props.data.map(order => <Marker lat={order.user.location.coordinates[1]}  lng={order.user.location.coordinates[0]} text="My Marker" color="red"/>)}
       </GoogleMapReact> : 

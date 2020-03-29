@@ -99,7 +99,7 @@ function Signup(props) {
     async function onRegister(){
       try{
         await firebase.register(username, email, password)
-        await axios.post('http://localhost:3007/add_user',{
+        await axios.post('http://localhost:3001/add_user',{
           username:username,
           password:password,
           email:email,

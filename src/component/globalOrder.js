@@ -5,7 +5,15 @@ import noImage from './../Assets/img/noImage.png'
 import profileImage from './../Assets/img/profileImage.png'
 import refresh from './../Assets/img/Refresh.png'
 function GlobalOrder(props) {
-    
+    const handleclick = async (item) => {
+        try {
+            await axios.post('http://localhost:3001/assin_order_to_user?userId='+localStorage.getItem('userId')+'&orderId='+item._id);
+            window.location.reload();
+        } catch(e) {
+            alert('error: '+e);
+        }
+        
+    }
     return(
        
           <div className="orderList">
@@ -40,7 +48,7 @@ function GlobalOrder(props) {
                                         </div>
                                         <p>{item.description}</p>
                                     </div>
-                                    <button className='basicBtn'>Help</button>
+                                    <button className='basicBtn' onClick={e => handleclick(item)}>Help</button>
                             </div>
                            
                             

@@ -1,13 +1,16 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext,useEffect } from 'react';
 import firebase from "../firebase";
 import {
   withRouter
 } from 'react-router-dom'
 import { AuthContext } from "./../App";
 
+import axios from 'axios'
+
 function Signup(props) {
 
     const Auth = useContext(AuthContext);
+ 
     const handleForm = e => {
       e.preventDefault();
       console.log(Auth);
@@ -16,7 +19,31 @@ function Signup(props) {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-  
+    const [lat, setLat] = useState("");
+    const [lng, setLng] = useState("");
+    useEffect(() => {
+      if ("geolocation" in navigator) {
+        // check if geolocation is supported/enabled on current browser
+        navigator.geolocation.getCurrentPosition(
+            function success(position) {
+                // for when getting location is a success
+                console.log('latitude', position.coords.latitude,'longitude', position.coords.longitude);
+                setLat(position.coords.latitude)
+                setLng(position.coords.longitude)
+                localStorage.setItem('lat',position.coords.latitude)
+                localStorage.setItem('lng',position.coords.longitude)
+            }.bind(this),
+            function error(error_message) {
+                // for when getting location results in an error
+                console.error('An error has occured while retrievinglocation', error_message)
+            }
+        );
+    } else {
+        // geolocation is not supported
+        // get your location some other way
+        console.log('geolocation is not enabled on this browser')
+    }
+    }, []);
     
     return (
       <div className="signup">
@@ -72,6 +99,13 @@ function Signup(props) {
     async function onRegister(){
       try{
         await firebase.register(username, email, password)
+        await axios.post('http://localhost:3007/add_user',{
+          username:username,
+          password:password,
+          email:email,
+          Lat:lat,
+          Long_:lng
+        })   
         props.history.push('/home')
       }catch(e){
         alert(e.message)

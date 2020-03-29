@@ -1,100 +1,99 @@
-// import { functions, isEqual, omit } from 'lodash'
-// import React, { useState, useEffect, useRef } from 'react'
+import { Map, GoogleApiWrapper, Marker,InfoWindow } from 'google-maps-react';
+import React, {Component} from 'react';
+// import  Current from './Marker';
+const mapStyles = {
+    height: 'calc(100vh - 150px)',
+    margin: `0em`,
+    top: `150px`
+    };
 
-// function Map({ options, onMount, className, onMountProps }) {
-//   const ref = useRef()
-//   const [map, setMap] = useState()
-
-//   useEffect(() => {
-//     // The Google Maps API modifies the options object passed to
-//     // the Map constructor in place by adding a mapTypeId with default
-//     // value 'roadmap'. { ...options } prevents this by creating a copy.
-//     const onLoad = () =>
-//       setMap(new window.google.maps.Map(ref.current, { ...options }))
-//     if (!window.google) {
-//       const script = document.createElement(`script`)
-//       script.src =
-//         `https://maps.googleapis.com/maps/api/js?key=AIzaSyBmuVFyl548_WfKr2oqchbb4LgEiwHYjEU`
-//       document.head.append(script)
-//       script.addEventListener(`load`, onLoad)
-//       return () => script.removeEventListener(`load`, onLoad)
-//     } else onLoad()
-//   }, [options])
-
-//   if (map && typeof onMount === `function`) onMount(map, onMountProps)
-
-//   return (
-//     <div
-//       style={{ height: `calc(100vh - 150px)`, margin: `0em`, top: `150px`}}
-//       {...{ ref, className }}
-//     />
-//   )
-// }
-
-// function shouldNotUpdate(props, nextProps) {
-//   const [funcs, nextFuncs] = [functions(props), functions(nextProps)]
-//   const noPropChange = isEqual(omit(props, funcs), omit(nextProps, nextFuncs))
-//   const noFuncChange =
-//     funcs.length === nextFuncs.length &&
-//     funcs.every(fn => props[fn].toString() === nextProps[fn].toString())
-//   return noPropChange && noFuncChange
-// }
-
-// export default React.memo(Map, shouldNotUpdate)
-
-// Map.defaultProps = {
-//   options: {
-//     center: { lat: 48, lng: 8 },
-//     zoom: 5,
-//   },
-// }
-
-import React, { useState , useEffect } from 'react';
-import GoogleMapReact from 'google-map-react';
-import Marker from './test/Marker'
-import env from '../env.json'
-
-const SimpleMap = (props) => {
-  const [center, setCenter] = useState({ lat: 11.0168, lng: 76.9558 });
-  const [zoom, setZoom] = useState(15);
-  const [visible , setVisible] = useState(false)
-  useEffect(() => {
-    console.log('data in map')
-    console.log(props.data)
-    if ("geolocation" in navigator) {
-      // check if geolocation is supported/enabled on current browser
-      navigator.geolocation.getCurrentPosition(
-        function success(position) {
-          // for when getting location is a success
-          console.log('latitude', position.coords.latitude, 'longitude', position.coords.longitude);
-          setCenter({ lat: position.coords.latitude, lng: position.coords.longitude })
-          setVisible(true)
-        },
-        function error(error_message) {
-          // for when getting location results in an error
-          console.error('An error has occured while retrievinglocation', error_message)
-        }
-      );
-    } else {
-      // geolocation is not supported
-      // get your location some other way
-      console.log('geolocation is not enabled on this browser')
-    }
-  }, []);
-
-
-  console.log('env in googlemap',env.REACT_APP_GoogleMap_API_KEY)
-  return (
-    <div style={{ height: '100vh', width: '100%' }}>
-      {visible ? 
-      <GoogleMapReact bootstrapURLKeys={{ key: env.REACT_APP_GoogleMap_API_KEY }} defaultCenter={center} defaultZoom={zoom}>
-        <Marker lat={center.lat} lng={center.lng} text="My Marker" color="blue"/>
-        {props.data.map(order => <Marker lat={order.user.location.coordinates[1]}  lng={order.user.location.coordinates[0]} text="My Marker" color="red"/>)}
-      </GoogleMapReact> : 
-      <p>Please refresh page</p>
+class Googlemap extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+          lat : parseInt(this.props.lat),
+          lng : parseInt(this.props.lng),
+          showingInfoWindow: false,  //Hides or the shows the infoWindow
+          activeMarker: {},          //Shows the active marker upon click
+          selectedPlace: {}          //Shows the infoWindow to the selected place upon a marker
       }
-    </div>
-  );
-}
+    }
+    
+    onMarkerClick = (props, marker, e) =>
+      this.setState({
+        selectedPlace: props,
+        activeMarker: marker,
+        showingInfoWindow: true
+      });
 
-export default SimpleMap;
+    onClose = props => {
+      if (this.state.showingInfoWindow) {
+        this.setState({
+          showingInfoWindow: false,
+          activeMarker: null
+        });
+      }
+    };
+    render() {
+  
+      if(this.props.lat === '' && this.props.lng === ''){
+        console.log('location not exist')
+        return (
+          
+            <Map
+            google={this.props.google}
+            zoom={13}
+            style={mapStyles}
+            initialCenter={{  lat: 39.833851,
+                lng: -74.871826}}
+            center={{  lat: 39.833851,
+                lng: -74.871826}} >
+             <Marker position={{ lat: 39.833851, lng: -74.871826}} />
+          </Map>
+          
+          
+      );
+      }else{
+        console.log('location exist')
+        return (
+          
+            <Map
+            google={this.props.google}
+            zoom={15}
+            style={mapStyles}
+            initialCenter={{  lat: this.props.lat,
+                lng: this.props.lng}}
+                center={{  lat: this.props.lat,
+                    lng: this.props.lng}}>
+             <Marker
+             position={{ lat: this.props.lat, lng: this.props.lng}} 
+             icon={{
+              url: 'https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/256/Map-Marker-Ball-Right-Azure.png',
+              // set marker width and height
+              scaledSize: new window.google.maps.Size(40, 40)
+             }
+            }
+             onClick={this.onMarkerClick}
+             name={'Current Location'}
+             />
+             <InfoWindow
+                marker={this.state.activeMarker}
+                visible={this.state.showingInfoWindow}
+                onClose={this.onClose}
+              >
+                <div>
+                  <h4>{this.state.selectedPlace.name}</h4>
+                </div>
+              </InfoWindow>
+             {this.props.orders.map((order,index) => <Marker key={index} position={{ lat: order.user.location.coordinates[1], lng: order.user.location.coordinates[0]}} />)}
+          </Map>
+          
+          
+      );
+      }
+      
+    }
+  }
+  export default GoogleApiWrapper({
+    apiKey: 'AIzaSyBmuVFyl548_WfKr2oqchbb4LgEiwHYjEU'
+  })(Googlemap);

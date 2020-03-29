@@ -12,6 +12,7 @@ import Box from '@material-ui/core/Box';
 import Map from './../googleMap'
 import GlobalOrder from './../globalOrder'
 import PostRequest from './../postRequest'
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -56,40 +57,49 @@ const useStylesTab = makeStyles(theme => ({
     top:100,
   },
 }));
+
+
+
 function Homepage() {
+
   const classesTabs = useStylesTab();
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [data, setData] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios('http://localhost:3001/get_all_orders');
-      setData(result.data);
-    };
-  
-    fetchData();
-  }, []);
-  
+  const lng = localStorage.getItem('lng')
+  const lat = localStorage.getItem('lat')
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+ 
 
-  
-
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios('http://localhost:3007/get_all_orders');
+      console.log('result,',result)
+      setData(result.data);
+    };
+    fetchData();
+  }, []);
+  useEffect(() => { console.log(data) }, [data])
   return (
+    
     <div className='homeContainer'>
+        {/* {showLoading && <Spinner animation="border" role="status">
+                    <span>Loading...</span>
+                </Spinner> } */}
       <div className={classes.root}>
         <AppBar className={classesTabs.root} position="static">
           <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-            <Tab label="Global Orders" {...a11yProps(0)} />
-            <Tab label="Near Orders" {...a11yProps(1)} />
-            <Tab label="Pending Orders" {...a11yProps(2)} />
-            <Tab label="Completed Orders" {...a11yProps(3)} />
+           
+            <Tab label="Near Orders" {...a11yProps(0)} />
+            <Tab label="Pending Orders" {...a11yProps(1)} />
+            <Tab label="Completed Orders" {...a11yProps(2)} />
           </Tabs>
         </AppBar>
         <TabPanel value={value} index={0} className='tabPanel'>
-          <PostRequest/>
-          <GlobalOrder data={data}/>
+          <PostRequest/>              
+          <GlobalOrder order={data} />
         </TabPanel>
         <TabPanel value={value} index={1}>
           Item Two
@@ -97,12 +107,15 @@ function Homepage() {
         <TabPanel value={value} index={2}>
           Item Three
         </TabPanel>
-        <TabPanel value={value} index={3}>
-          Item Three
-        </TabPanel>
+       
       </div>
       <div className='map'>
-        <Map data={data}/>
+ 
+      
+        <Map lng = {lng} lat = {lat} orders={data}/>
+      
+   
+        
       </div>
     </div>
   );

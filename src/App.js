@@ -1,5 +1,5 @@
-import React, {useState,useContext}from 'react';
-import { BrowserRouter as Router, Switch, Route ,Redirect} from "react-router-dom"
+import React, { useState, useContext } from 'react';
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom"
 import './App.css';
 
 //components
@@ -20,26 +20,26 @@ export const AuthContext = React.createContext(null);
 
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(false);
-  return(
+  return (
     <AuthContext.Provider value={{ isLoggedIn, setLoggedIn }}>
       <Router>
         <div className="App">
-          <Header/>
+          <Header />
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/signin" component={Signinpage} />
             {/* <PrivateRoute exact path="/home" component={Homepage} />  */}
-            <Route exact path="/home" component={Homepage} /> 
+            <Route exact path="/home" component={Homepage} />
           </Switch>
 
-  //       </div>
-  //     </Router> 
-  //  </AuthContext.Provider>
-  // <Image />
-  // <Uploadimage />
-  <OrderList />
+        </div>
+      </Router>
+    </AuthContext.Provider>
+    // <Image />
+    // <Uploadimage />
+    // <OrderList />
   )
-  
+
 }
 
 export default App;

@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import firebase from '../../firebase'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
@@ -60,10 +60,22 @@ function Homepage() {
   const classesTabs = useStylesTab();
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  const [data, setData] = useState({ orders: [] });
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios('http://localhost:3001/get_all_orders');
+      setData(result.data);
+    };
+  
+    fetchData();
+  }, []);
+  
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  
+
   return (
     <div className='homeContainer'>
       <div className={classes.root}>
@@ -77,7 +89,7 @@ function Homepage() {
         </AppBar>
         <TabPanel value={value} index={0} className='tabPanel'>
           <PostRequest/>
-          <GlobalOrder/>
+          <GlobalOrder data={data}/>
         </TabPanel>
         <TabPanel value={value} index={1}>
           Item Two
@@ -90,7 +102,7 @@ function Homepage() {
         </TabPanel>
       </div>
       <div className='map'>
-        <Map />
+        <Map data={data}/>
       </div>
     </div>
   );

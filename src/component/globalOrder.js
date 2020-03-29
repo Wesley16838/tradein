@@ -5,26 +5,25 @@ import axios from 'axios';
 import noImage from './../Assets/img/noImage.png'
 import profileImage from './../Assets/img/profileImage.png'
 import refresh from './../Assets/img/Refresh.png'
-function GlobalOrder() {
-    const [data, setData] = useState([]);
-    const [showLoading, setShowLoading] = useState(true);
-    useEffect(() => {
-        const fetchData = async () => {
-          const result = await axios('http://localhost:3007/get_all_orders');
-          setData(result.data);
-          setShowLoading(false);
-        };
+function GlobalOrder(props) {
+    const [data, setData] = useState(props.orders);
+    const [showLoading, setShowLoading] = useState(false);
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //       const result = await axios('http://localhost:3001/get_all_orders');
+    //       setData(result.data);
+    //       setShowLoading(false);
+    //     };
       
-        fetchData();
-      }, []);
-    
+    //     fetchData();
+    //   }, []);
     return(
           <div className="orderList">
                {showLoading && <Spinner animation="border" role="status">
                     <span>Loading...</span>
                 </Spinner> }
              <ul className="orders" >
-             {data.map((item, idx) => {
+             {props.data.map((item, idx) => {
                  if(item.image == null){
                     return (<li className="order" key={idx}>
                            
@@ -47,8 +46,8 @@ function GlobalOrder() {
                                             </div>
                                             <img src={refresh}/>
                                             <div className='wishProd'>
-                                                <p className='prodName'>{item.prod}</p>
-                                                <p className='prodAmount'>Amount: {item.amt}</p>
+                                                <p className='prodName'>{item.wish}</p>
+                                                <p className='prodAmount'>Amount: {item.wish_amt}</p>
                                             </div>
                                         </div>
                                         <p>{item.description}</p>

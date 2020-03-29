@@ -83,7 +83,6 @@ function Homepage() {
     };
     fetchData();
   }, []);
-  useEffect(() => { console.log(data) }, [data])
   return (
     
     <div className='homeContainer'>

@@ -13,7 +13,6 @@ function Signup(props) {
  
     const handleForm = e => {
       e.preventDefault();
-      console.log(Auth);
       Auth.setLoggedIn(true);
 
     };
@@ -106,7 +105,6 @@ function Signup(props) {
           Lat:lat,
           Long_:lng
         })   
-        console.log('user, ',user)
         localStorage.setItem('userId',user.data._id)
         props.history.push('/home')
       }catch(e){

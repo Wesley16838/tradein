@@ -7,10 +7,10 @@ function PostRequest() {
     const { handleSubmit, register, reset,errors } = useForm();
     const [dummy, reload] = useState(false);
     const onSubmit = async values => {
-
+        let userID = localStorage.getItem('userId')
         console.log(values);
         var result = await axios.post('http://localhost:3001/add_order',{
-            userId: '5e7f9708ba65143aa8a0f13b',
+            userId: userID,
             prod: values.product,
             amt: values.prodAmount,
             wish:values.wishProduct,

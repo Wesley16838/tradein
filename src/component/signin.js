@@ -9,7 +9,6 @@ function Login(props) {
     const Auth = useContext(AuthContext);
     const handleForm = e => {
       e.preventDefault();
-      console.log(Auth);
       Auth.setLoggedIn(true);
     };
     const [email, setEmail] = useState("");

@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom"
+import React, {useState,useContext, useEffect}from 'react';
+import { BrowserRouter as Router, Switch, Route ,Redirect} from "react-router-dom"
 import './App.css';
 
 //components
@@ -12,16 +12,48 @@ import PrivateRoute from './component/privateRoute'
 import Image from './component/test/Image'
 import Uploadimage from './component/test/Uploadimage'
 import OrderList from './component/test/OrderList'
+import ProtectedRoute from './component/privateRoute'
 //includes
 import './Assets/css/styles.min.css'//css file
 
+//Firebase
+import firebase from 'firebase/app'
+import 'firebase/auth';
+
 export const AuthContext = React.createContext(null);
 
-
+function onAuthStateChange(callback1,callback2,callback3) {
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      callback1(true);
+      callback2(user.displayName)
+      callback3(false)
+    } else {
+      callback1(false);
+      callback2('')
+      callback3(false)
+    }
+  });
+}
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(false);
-  return (
-    <AuthContext.Provider value={{ isLoggedIn, setLoggedIn }}>
+  const [user, setUser] = useState('');
+  const [isLoading, setLoad] = useState(true)
+  useEffect(() => {
+    const unsubscribe = onAuthStateChange(setLoggedIn,setUser,setLoad);
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+  if(isLoading){
+    return <div className="loading">
+    <svg className="spinner" width="65px" height="65px" viewBox="0 0 66 66">
+      <circle className="path" fill="none" strokeWidth="6" strokeLinecap="round" cx="33" cy="33" r="30"></circle>
+    </svg>
+        </div>
+  }
+  return(
+    <AuthContext.Provider value={{ isLoggedIn, setLoggedIn,user, setUser }}>
       <Router>
         <div className="App">
           <Header />
@@ -29,7 +61,7 @@ function App() {
             <Route exact path="/" component={Landing} />
             <Route exact path="/signin" component={Signinpage} />
             {/* <PrivateRoute exact path="/home" component={Homepage} />  */}
-            <Route exact path="/home" component={Homepage} />
+            <ProtectedRoute exact path="/home" component={Homepage} /> 
           </Switch>
 
         </div>

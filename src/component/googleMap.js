@@ -70,7 +70,7 @@ class Googlemap extends Component {
              icon={{
               url: 'https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/256/Map-Marker-Ball-Right-Azure.png',
               // set marker width and height
-              scaledSize: new window.google.maps.Size(40, 40)
+              scaledSize: new window.google.maps.Size(50, 50)
              }
             }
              onClick={this.onMarkerClick}

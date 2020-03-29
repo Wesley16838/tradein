@@ -15,6 +15,7 @@ function Signup(props) {
       e.preventDefault();
       console.log(Auth);
       Auth.setLoggedIn(true);
+
     };
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -30,8 +31,6 @@ function Signup(props) {
                 console.log('latitude', position.coords.latitude,'longitude', position.coords.longitude);
                 setLat(position.coords.latitude)
                 setLng(position.coords.longitude)
-                localStorage.setItem('lat',position.coords.latitude)
-                localStorage.setItem('lng',position.coords.longitude)
             }.bind(this),
             function error(error_message) {
                 // for when getting location results in an error
@@ -99,13 +98,16 @@ function Signup(props) {
     async function onRegister(){
       try{
         await firebase.register(username, email, password)
-        await axios.post('http://localhost:3001/add_user',{
+        console.log('lat,',lat)
+        let user = await axios.post('http://localhost:3001/add_user',{
           username:username,
           password:password,
           email:email,
           Lat:lat,
           Long_:lng
         })   
+        console.log('user, ',user)
+        localStorage.setItem('userId',user.data._id)
         props.history.push('/home')
       }catch(e){
         alert(e.message)

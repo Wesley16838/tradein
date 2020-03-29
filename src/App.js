@@ -8,8 +8,10 @@ import Landing from './component/pages/landing'
 import Signinpage from './component/pages/signinPage'
 import Homepage from './component/pages/home'
 import PrivateRoute from './component/privateRoute'
+
 import Image from './component/test/Image'
 import Uploadimage from './component/test/Uploadimage'
+import OrderList from './component/test/OrderList'
 //includes
 import './Assets/css/styles.min.css'//css file
 
@@ -33,7 +35,8 @@ function App() {
   //     </Router> 
   //  </AuthContext.Provider>
   // <Image />
-  <Uploadimage />
+  // <Uploadimage />
+  <OrderList />
   )
   
 }

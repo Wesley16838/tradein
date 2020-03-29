@@ -5,13 +5,13 @@ class Image extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            img: null
+            img: props.img
         }
         this.getImage = this.getImage.bind(this);
     }
 
     componentDidMount() {
-        this.getImage('8.jpg')
+        this.getImage(this.state.img)
     }
 
     async getImage(image) {

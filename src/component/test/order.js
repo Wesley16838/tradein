@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Image from './Image'
 
 class Order extends Component {
     constructor(props) {
@@ -12,6 +13,7 @@ class Order extends Component {
         return (
             <div>
                 <h2>Post by: {this.state.data.user.username}</h2>
+                <Image img={this.state.data.user.icon}/>
                 <h4>Poster Location: [{this.state.data.user.location.coordinates[1]},{this.state.data.user.location.coordinates[0]}]</h4>
                 <h5>Distance: {this.props.dis}</h5>
                 <h4>Offer Product: {this.state.data.prod}</h4>

@@ -109,12 +109,7 @@ function Homepage() {
        
       </div>
       <div className='map'>
- 
-      
         <Map lng = {lng} lat = {lat} orders={data}/>
-      
-   
-        
       </div>
     </div>
   );

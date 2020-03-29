@@ -10,7 +10,7 @@ function Header(props) {
   return (
     <header>
       <AuthContext.Consumer>
-      {({ isLoggedIn }) => (
+      {({ isLoggedIn, user }) => (
         <React.Fragment>
           <div className='headerLeft'>
           <div className="logo">
@@ -28,7 +28,10 @@ function Header(props) {
                   
                   {
                       isLoggedIn
-                      ? <Link className="basicBtn" to='/' onClick={logout}>Log Out</Link> 
+                      ? <div className='headerRight'>
+                          <p>Hello {user} </p>
+                          <Link className="basicBtn" to='/' onClick={logout}>Log Out</Link> 
+                        </div>
                       : <Link className="basicBtn" to='/signin' >Sign In</Link> 
                   }
                     

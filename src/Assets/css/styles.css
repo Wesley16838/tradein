@@ -308,6 +308,11 @@ input[type=search]:focus {
 #expandSearch input::-webkit-input-placeholder {
   color: transparent; }
 
+.headerRight {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
 .homeContainer {
   display: flex;
   flex-direction: row; }
@@ -457,9 +462,11 @@ h4 {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  height: calc(100vh - 100px);
+  height: 100vh;
   display: flex;
   flex-direction: row; }
+  .header section {
+    margin-top: 100px; }
   .header .headerLeft {
     background-image: url("./../img/hand.png");
     background-position: bottom center;
@@ -583,7 +590,6 @@ h4 {
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
-  margin-top: -100px;
   display: flex;
   align-items: center;
   justify-content: center; }

@@ -21,15 +21,16 @@ export const AuthContext = React.createContext(null);
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(false);
   return(
-  //   <AuthContext.Provider value={{ isLoggedIn, setLoggedIn }}>
-  //     <Router>
-  //       <div className="App">
-  //         <Header/>
-  //         <Switch>
-  //           <Route exact path="/" component={Landing} />
-  //           <Route exact path="/signin" component={Signinpage} />
-  //           <PrivateRoute exact path="/home" component={Homepage} /> 
-  //         </Switch>
+    <AuthContext.Provider value={{ isLoggedIn, setLoggedIn }}>
+      <Router>
+        <div className="App">
+          <Header/>
+          <Switch>
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/signin" component={Signinpage} />
+            {/* <PrivateRoute exact path="/home" component={Homepage} />  */}
+            <Route exact path="/home" component={Homepage} /> 
+          </Switch>
 
   //       </div>
   //     </Router> 

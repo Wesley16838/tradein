@@ -30,6 +30,8 @@ function Signup(props) {
                 console.log('latitude', position.coords.latitude,'longitude', position.coords.longitude);
                 setLat(position.coords.latitude)
                 setLng(position.coords.longitude)
+                localStorage.setItem('lat',position.coords.latitude)
+                localStorage.setItem('lng',position.coords.longitude)
             }.bind(this),
             function error(error_message) {
                 // for when getting location results in an error

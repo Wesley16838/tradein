@@ -47,6 +47,9 @@ function Header(props) {
   async function logout() {
     await firebase.logout()
     Auth.setLoggedIn(false);
+    localStorage.removeItem('userId')
+    localStorage.removeItem('lat')
+    localStorage.removeItem('lng')
 		props.history.push('/')
 	}
 }

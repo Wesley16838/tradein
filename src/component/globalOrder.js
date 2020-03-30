@@ -7,10 +7,11 @@ import refresh from './../Assets/img/Refresh.png'
 function GlobalOrder(props) {
     const handleclick = async (item) => {
         try {
-            await axios.post('http://localhost:3001/assin_order_to_user?userId='+localStorage.getItem('userId')+'&orderId='+item._id);
+            await axios.put('http://localhost:3001/assign_order_to_user?userId='+localStorage.getItem('userId')+'&orderId='+item._id);
+            // alert('user '+localStorage.getItem('userId')+'buys'+item.prod)
             window.location.reload();
         } catch(e) {
-            alert('error: '+e);
+            alert('error: ' + e);
         }
         
     }

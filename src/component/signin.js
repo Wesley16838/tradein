@@ -59,7 +59,7 @@ function Login(props) {
         console.log(email+password)
         await firebase.login(email, password)
         console.log('af login')
-        let user = await axios.get('http://localhost:3007/get_user_by_email?email='+email)
+        let user = await axios.get('http://localhost:3001/get_user_by_email?email='+email)
         console.log('af get user')   
         localStorage.setItem('userId',user.data._id)
         props.history.replace('/home')

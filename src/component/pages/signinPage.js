@@ -8,8 +8,7 @@ function login(username, password) {
 }
 
 export default function Signinpage() {
-  const [lng, setCacheLng] = useState('')
-  const [lat, setCacheLat] = useState('')
+
   const requestLogin = useCallback((username, password) => {
     login(username, password);
   });

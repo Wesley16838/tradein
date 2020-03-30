@@ -26,14 +26,19 @@ function AllPending(props) {
     const handledecline = async (item) => {
         try {
             await axios.put('http://localhost:3001/set_order_open?orderId='+item._id)
-            await fetchData();
+            window.location.reload();
         } catch (e) {
             alert('error: ' + e);
         }
     }
 
     const handleaccept = async (item) => {
-        
+        try {
+            await axios.put('http://localhost:3001/set_order_complete?orderId='+item._id)
+            window.location.reload();
+        } catch (e) {
+            alert('error: ' + e);
+        }
     }
 
     return (

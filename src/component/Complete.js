@@ -18,83 +18,63 @@ function AllComplete(props) {
     }, []);
     return (
 
-        <div className="pendingOrderList">
-            <ul className="pendingOrders" >
+        <div className="completedOrderList">
+            <ul className="completedOrders" >
            {data.map((item, idx) => {
                if(item.image == null){
-                  return (<li className="pendingOrder" key={idx}>
+                  return (<li className="completedOrder" key={idx}>
                                 
                               <div className='prodImage'>
                                   <img src={noImage} />
                               </div>
-                              <div className='pendingDetail'>
-                                 <div class='pendingTitle'>
-                                    <p className="pendingStatus">Status:{item.status}</p>
+                              <div className='completedDetail'>
+                                 <div className='completedTitle'>
+                                    <p className="completedStatus">Status:{item.status}</p>
                                     {item.role == 'buyer' ? (
-                                        <p className="pendingRoleBuyer">{item.role}</p>
+                                        <p className="completedRoleBuyer">{item.role}</p>
                                     ):(
-                                        <p className="pendingRoleSeller">{item.role}</p>
+                                        <p className="completedRoleSeller">{item.role}</p>
                                     )}
                                  </div>
-                                 <div className='pendingContent'>
+                                 <div className='completedContent'>
                                  {item.role == 'buyer' ? (
                                      <React.Fragment>
-                                        <div className="buyerInfo">
-                                            <p className="roleTitle">Buyer</p>
-                                            <div className="buyerDetail"> 
-                                                <img src={profileImage}/><p>{item.reserved_by_user.username}</p>
-                                            </div>
-                                            <p className="roleEmail">{item.reserved_by_user.email}</p>
-                                            <p className="roleProd">Item Name:{item.wish}</p>
-                                            <p className="roleAmt">Amount:{item.wish_amt}</p>
+                                        <div className="buyer"> 
+                                            <img src={profileImage}/><p>You trade with {item.user.username}</p>
                                         </div>
-                                        <img className="redarrow" src={redArrow}/>
-                                        <div className="sellerInfo">
-                                            <p className="roleTitle">Seller</p>
-                                            <div className="sellerDetail"> 
-                                                <img src={profileImage}/><p>{item.user.username}</p>
+                                        <div className="completedMoreDetail">
+                                            <div className="buyerInfo">
+                                                <p className="roleProd">{item.wish}</p>
+                                                <p className="roleAmt">Amount:{item.wish_amt}</p>
                                             </div>
-                                            <p className="roleEmail">{item.user.email}</p>
-                                            <p className="roleProd">Item Name:{item.prod}</p>
-                                            <p className="roleAmt">Amount:{item.amt}</p>
+                                            <img className="redarrow" src={redArrow}/>
+                                            <div className="sellerInfo">
+                                                <p className="roleProd">Item Name:{item.prod}</p>
+                                                <p className="roleAmt">Amount:{item.amt}</p>
+                                            </div>
                                         </div>
-                                     </React.Fragment>
-                                         
+                                     </React.Fragment>   
                                     ) : (
-                                     <React.Fragment>
-                                        <div className="sellerInfo">
-                                            <p className="roleTitle">Seller</p>
-                                            <div className="sellerDetail"> 
-                                                <img src={profileImage}/><p>{item.user.username}</p>
-                                            </div>
-                                            <p className="roleEmail">{item.user.email}</p>
-                                            <p className="roleProd">Item Name:{item.prod}</p>
-                                            <p className="roleAmt">Amount:{item.amt}</p>
+                                        <React.Fragment>
+                                        <div className="buyer"> 
+                                            <img src={profileImage}/><p>{item.reserved_by_user.username} trade with you</p>
                                         </div>
-                                        <img className="redarrow" src={redArrow}/>
-                                        <div className="buyerInfo">
-                                            <p className="roleTitle">Buyer</p>
-                                            <div className="buyerDetail"> 
-                                                <img src={profileImage}/><p>{item.reserved_by_user.username}</p>
+                                        <div className="completedMoreDetail">
+                                            <div className="sellerInfo">
+                                                <p className="roleProd">{item.wish}</p>
+                                                <p className="roleAmt">Amount:{item.wish_amt}</p>
                                             </div>
-                                            <p className="roleEmail">{item.reserved_by_user.email}</p>
-                                            <p className="roleProd">Item Name:{item.wish}</p>
-                                            <p className="roleAmt">Amount:{item.wish_amt}</p>
+                                            <img className="redarrow" src={redArrow}/>
+                                            <div className="sellerInfo">
+                                                <p className="roleProd">Item Name:{item.prod}</p>
+                                                <p className="roleAmt">Amount:{item.amt}</p>
+                                            </div>
                                         </div>
-                                     </React.Fragment>
+                                     </React.Fragment>   
                                     )}
                                     
                                  </div>
-                                 <div className='pendingResult'>
-                                 {item.role == 'buyer' ? (
-                                     <div className='waiting'>Waiting for Seller</div>
-                                 ):(
-                                    <React.Fragment>
-                                     <button className="cancelBtn" >Cancel</button>
-                                     <button className="acceptBtn">Accept</button>
-                                    </React.Fragment>
-                                 )}
-                                 </div>
+                               
                               </div>
                          
                           

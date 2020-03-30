@@ -55,12 +55,15 @@ function Login(props) {
     );
     async function login() {
       try {
-        console.log('bf login')
-        console.log(email+password)
-        await firebase.login(email, password)
-        console.log('af login')
-        let user = await axios.get('http://localhost:3001/get_user_by_email?email='+email)
-        console.log('af get user')   
+        console.log('login in')
+        let lat = localStorage.getItem('lat')
+        let lng = localStorage.getItem('lng')
+        console.log('lat,',lat)
+        console.log('after location')
+        await firebase.login(email, password)  
+        console.log('af firebase')
+        let user = await axios.get('http://localhost:3001/get_user_by_email?email='+email+'&Lat='+lat+'&Long='+lng) 
+        console.log('af api') 
         localStorage.setItem('userId',user.data._id)
         props.history.replace('/home')
       } catch(error) {

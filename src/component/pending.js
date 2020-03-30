@@ -33,7 +33,7 @@ function AllPending(props) {
     }
 
     const handleaccept = async (item) => {
-
+        
     }
 
     return (

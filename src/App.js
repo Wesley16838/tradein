@@ -1,5 +1,5 @@
-import React, {useState,useContext, useEffect}from 'react';
-import { BrowserRouter as Router, Switch, Route ,Redirect} from "react-router-dom"
+import React, {useState, useEffect}from 'react';
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom"
 import './App.css';
 
 //components
@@ -24,6 +24,7 @@ function onAuthStateChange(callback1,callback2,callback3) {
       callback2(user.displayName)
       callback3(false)
     } else {
+
       callback1(false);
       callback2('')
       callback3(false)

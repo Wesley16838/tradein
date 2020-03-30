@@ -83,7 +83,15 @@ class Googlemap extends Component {
                   <h4>{this.state.selectedPlace.name}</h4>
                 </div>
               </InfoWindow>
-             {this.props.orders.map((order,index) => <Marker key={index} position={{ lat: order.user.location.coordinates[1], lng: order.user.location.coordinates[0]}} />)}
+             {this.props.orders.map((order,index) => 
+           
+            <Marker 
+              key={index} 
+              position={{ lat: order.user.location.coordinates[1], lng: order.user.location.coordinates[0]}} 
+              onClick={this.onMarkerClick}
+              name={'Location'}
+             />
+             )}
           </Map>
           
           

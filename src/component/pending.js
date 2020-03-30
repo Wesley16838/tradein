@@ -1,44 +1,66 @@
-import React,{useState, useEffect,useContext} from 'react';
+import React,{useState, useEffect} from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import noImage from './../Assets/img/noImage.png'
 import profileImage from './../Assets/img/profileImage.png'
-import refresh from './../Assets/img/Refresh.png'
 import redArrow from './../Assets/img/arrow_red.png'
 function AllPending(props) {
-    console.log("in all pending" , localStorage.getItem('userId'))
+
     const [data , setData] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
-          const result = await axios('http://localhost:3007/get_pending_by_user?userId='+localStorage.getItem('userId'));
-          console.log('result in pending,',result)
+          const result = await axios('http://localhost:3001/get_pending_by_user?userId='+localStorage.getItem('userId'));
+
           setData(result.data);
         };
         fetchData();
       }, []);
+    
+
+    const handledecline = async (item) => {
+        try {
+            await axios.put('http://localhost:3001/set_order_open?orderId='+item._id)
+            window.location.reload();
+        } catch (e) {
+            alert('error: ' + e);
+        }
+    }
+
+    const handleaccept = async (item) => {
+        try {
+            await axios.put('http://localhost:3001/set_order_complete?orderId='+item._id)
+            window.location.reload();
+        } catch (e) {
+            alert('error: ' + e);
+        }
+    }
     return(
        
         <div className="pendingOrderList">
            
            <ul className="pendingOrders" >
-           {data.map((item, idx) => {
-               if(item.image == null){
+               {data.length ===0?(
+                   <p>No pending order</p>
+               ):(
+                   <div>
+{data.map((item, idx) => {
+               if(item.image === null){
                   return (<li className="pendingOrder" key={idx}>
                          
                               <div className='prodImage'>
-                                  <img src={noImage} />
+                                  <img src={noImage} alt='no image'/>
                               </div>
                               <div className='pendingDetail'>
                                  <div className='pendingTitle'>
                                 <p className="pendingStatus">Status:{item.status}</p>
-                                    {item.role == 'buyer' ? (
+                                    {item.role === 'buyer' ? (
                                         <p className="pendingRoleBuyer">{item.role}</p>
                                     ):(
                                         <p className="pendingRoleSeller">{item.role}</p>
                                     )}
                                  </div>
                                  <div className='pendingContent'>
-                                 {item.role == 'buyer' ? (
+                                 {item.role === 'buyer' ? (
                                      <React.Fragment>
                                         <div className="buyerInfo">
                                             <p className="roleTitle">Buyer</p>
@@ -49,7 +71,7 @@ function AllPending(props) {
                                             <p className="roleProd">Item Name:{item.wish}</p>
                                             <p className="roleAmt">Amount:{item.wish_amt}</p>
                                         </div>
-                                        <img className="redarrow" src={redArrow}/>
+                                        <img className="redarrow" src={redArrow} alt='arrow'/>
                                         <div className="sellerInfo">
                                             <p className="roleTitle">Seller</p>
                                             <div className="sellerDetail"> 
@@ -91,8 +113,8 @@ function AllPending(props) {
                                      <div className='waiting'>Waiting for Seller</div>
                                  ):(
                                     <React.Fragment>
-                                     <button className="cancelBtn" >Cancel</button>
-                                     <button className="acceptBtn">Accept</button>
+                                       <button className="cancelBtn" onClick={e => handledecline(item)}>Cancel</button>
+                                        <button className="acceptBtn" onClick={e => handleaccept(item)}>Accept</button>
                                     </React.Fragment>
                                  )}
                                  </div>
@@ -117,6 +139,9 @@ function AllPending(props) {
                }
                
            })}
+                   </div>
+               )}
+           
            </ul>
         </div>
 

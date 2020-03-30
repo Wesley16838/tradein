@@ -9,7 +9,7 @@ function Login(props) {
     const Auth = useContext(AuthContext);
     const handleForm = e => {
       e.preventDefault();
-      Auth.setLoggedIn(true);
+     
     };
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -55,15 +55,11 @@ function Login(props) {
     );
     async function login() {
       try {
-        console.log('login in')
         let lat = localStorage.getItem('lat')
         let lng = localStorage.getItem('lng')
-        console.log('lat,',lat)
-        console.log('after location')
         await firebase.login(email, password)  
-        console.log('af firebase')
-        let user = await axios.get('http://localhost:3007/get_user_by_email?email='+email+'&Lat='+lat+'&Long='+lng) 
-        console.log('af api') 
+        let user = await axios.get('http://localhost:3001/get_user_by_email?email='+email+'&Lat='+lat+'&Long='+lng) 
+        Auth.setLoggedIn(true);
         localStorage.setItem('userId',user.data._id)
         props.history.replace('/home')
       } catch(error) {

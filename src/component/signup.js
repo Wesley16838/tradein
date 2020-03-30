@@ -13,7 +13,7 @@ function Signup(props) {
  
     const handleForm = e => {
       e.preventDefault();
-      Auth.setLoggedIn(true);
+     
 
     };
     const [username, setUsername] = useState("");
@@ -27,7 +27,7 @@ function Signup(props) {
         navigator.geolocation.getCurrentPosition(
             function success(position) {
                 // for when getting location is a success
-                console.log('latitude', position.coords.latitude,'longitude', position.coords.longitude);
+             
                 setLat(position.coords.latitude)
                 setLng(position.coords.longitude)
                 localStorage.setItem('lat',position.coords.latitude)
@@ -59,6 +59,7 @@ function Signup(props) {
               }}
               value={username}
               id='displayName'
+              required
             />
           </div>
           <div className="form-group">
@@ -98,14 +99,18 @@ function Signup(props) {
     );
     async function onRegister(){
       try{
+        if(username==''){
+          throw new Error('Please input your Username');
+        }
         await firebase.register(username, email, password)
-        let user = await axios.post('http://localhost:3007/add_user',{
+        let user = await axios.post('http://localhost:3001/add_user',{
           username:username,
           password:password,
           email:email,
           Lat:lat,
           Long_:lng
         })   
+        Auth.setLoggedIn(true);
         localStorage.setItem('userId',user.data._id)
         props.history.push('/home')
       }catch(e){

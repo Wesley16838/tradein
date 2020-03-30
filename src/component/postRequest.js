@@ -1,15 +1,15 @@
-import React,{useState, useEffect,useContext} from 'react';
+import React,{useState} from 'react';
 import { withRouter } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
-import profileImage from './../Assets/img/profileImage.png'
+
 function PostRequest() {
-    const { handleSubmit, register, reset,errors } = useForm();
-    const [dummy, reload] = useState(false);
+    const { handleSubmit, register,errors } = useForm();
+    const [dummy] = useState(false);
     const onSubmit = async values => {
         let userID = localStorage.getItem('userId')
-        console.log(values);
-        var result = await axios.post('http://localhost:3007/add_order',{
+
+        var result = await axios.post('http://localhost:3001/add_order',{
             userId: userID,
             prod: values.product,
             amt: values.prodAmount,

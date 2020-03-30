@@ -1,11 +1,20 @@
-import React,{useState, useEffect,useContext} from 'react';
+import React from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import noImage from './../Assets/img/noImage.png'
 import profileImage from './../Assets/img/profileImage.png'
 import refresh from './../Assets/img/Refresh.png'
 function GlobalOrder(props) {
-    
+    const handleclick = async (item) => {
+        try {
+            await axios.put('http://localhost:3001/assign_order_to_user?userId='+localStorage.getItem('userId')+'&orderId='+item._id);
+            alert('user '+localStorage.getItem('userId')+'buys'+item.prod)
+            window.location.reload();
+        } catch(e) {
+            alert('error: ' + e);
+        }
+        
+    }
     return(
        
           <div className="orderList">
@@ -34,13 +43,13 @@ function GlobalOrder(props) {
                                             </div>
                                             <img src={refresh}/>
                                             <div className='wishProd'>
-                                                <p className='prodName'>{item.prod}</p>
-                                                <p className='prodAmount'>Amount: {item.amt}</p>
+                                                <p className='prodName'>{item.wish}</p>
+                                                <p className='prodAmount'>Amount: {item.wish_amt}</p>
                                             </div>
                                         </div>
                                         <p>{item.description}</p>
                                     </div>
-                                    <button className='basicBtn'>Help</button>
+                                    {item.user._id!=localStorage.getItem("userId")?<button className='basicBtn' onClick={e => handleclick(item)}>Help</button>:<div></div>}
                             </div>
                            
                             

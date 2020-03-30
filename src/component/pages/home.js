@@ -76,11 +76,9 @@ function Homepage() {
     const tabs = document.querySelector('#tabs')
     const panels = document.querySelectorAll('.tabPanel')
     if(e.target.innerText !== 'NEAR ORDERS'){
-      console.log('width==0')
       document.getElementsByClassName('map')[0].style.display='none'
       document.getElementById('mainTab').style.width='100%'
     }else{
-      console.log('width==100%')
       document.getElementsByClassName('map')[0].style.display='block'
       document.getElementById('mainTab').style.width='840px'
     }
@@ -89,7 +87,7 @@ function Homepage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios('http://localhost:3007/get_all_orders');
+      const result = await axios('http://localhost:3001/get_all_orders');
       setData(result.data);
     };
     fetchData();

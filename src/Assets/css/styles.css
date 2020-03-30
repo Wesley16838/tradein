@@ -413,6 +413,7 @@ input[type=search]:focus {
     justify-content: space-between; }
   .requestForm textarea[name="description"] {
     border: none;
+    border-bottom: 1px solid #9d9d9d;
     width: 100%;
     height: 50px; }
 
@@ -556,6 +557,127 @@ h4 {
       .bodyContent .bodyDetail .detail h3 {
         margin: 0px;
         font-weight: normal; }
+
+.pendingOrderList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 920px;
+  margin: auto; }
+  .pendingOrderList .pendingOrders {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0em 1em;
+    width: 100%; }
+    .pendingOrderList .pendingOrders li {
+      list-style-type: none; }
+    .pendingOrderList .pendingOrders .pendingOrder {
+      display: flex;
+      flex-direction: row;
+      height: 350px;
+      width: 100%;
+      background-color: #fff;
+      margin: 1em 0em;
+      padding: 1em;
+      box-sizing: border-box;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+      .pendingOrderList .pendingOrders .pendingOrder .pendingDetail {
+        display: flex;
+        flex-direction: column;
+        width: 620px; }
+        .pendingOrderList .pendingOrders .pendingOrder .pendingDetail .pendingTitle {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          border-bottom: 1px solid #000; }
+          .pendingOrderList .pendingOrders .pendingOrder .pendingDetail .pendingTitle .pendingStatus {
+            font-weight: bold; }
+          .pendingOrderList .pendingOrders .pendingOrder .pendingDetail .pendingTitle .pendingRoleBuyer {
+            color: #C60000; }
+          .pendingOrderList .pendingOrders .pendingOrder .pendingDetail .pendingTitle .pendingRoleSeller {
+            color: #00B407; }
+        .pendingOrderList .pendingOrders .pendingOrder .pendingDetail .pendingContent {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          text-align: left;
+          height: 100%; }
+          .pendingOrderList .pendingOrders .pendingOrder .pendingDetail .pendingContent .buyerInfo {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            height: 100%; }
+            .pendingOrderList .pendingOrders .pendingOrder .pendingDetail .pendingContent .buyerInfo p {
+              margin: 0px; }
+            .pendingOrderList .pendingOrders .pendingOrder .pendingDetail .pendingContent .buyerInfo .buyerDetail {
+              display: flex;
+              flex-direction: row;
+              align-items: center; }
+              .pendingOrderList .pendingOrders .pendingOrder .pendingDetail .pendingContent .buyerInfo .buyerDetail img {
+                width: 50px;
+                margin-right: 10px; }
+              .pendingOrderList .pendingOrders .pendingOrder .pendingDetail .pendingContent .buyerInfo .buyerDetail p {
+                font-weight: bold; }
+          .pendingOrderList .pendingOrders .pendingOrder .pendingDetail .pendingContent .redarrow {
+            height: 25px; }
+          .pendingOrderList .pendingOrders .pendingOrder .pendingDetail .pendingContent .sellerInfo {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            height: 100%; }
+            .pendingOrderList .pendingOrders .pendingOrder .pendingDetail .pendingContent .sellerInfo p {
+              margin: 0px; }
+            .pendingOrderList .pendingOrders .pendingOrder .pendingDetail .pendingContent .sellerInfo .sellerDetail {
+              display: flex;
+              flex-direction: row;
+              align-items: center; }
+              .pendingOrderList .pendingOrders .pendingOrder .pendingDetail .pendingContent .sellerInfo .sellerDetail img {
+                width: 50px;
+                margin-right: 10px; }
+              .pendingOrderList .pendingOrders .pendingOrder .pendingDetail .pendingContent .sellerInfo .sellerDetail p {
+                font-weight: bold; }
+        .pendingOrderList .pendingOrders .pendingOrder .pendingDetail .pendingResult {
+          display: flex;
+          align-items: center;
+          justify-content: space-evenly; }
+          .pendingOrderList .pendingOrders .pendingOrder .pendingDetail .pendingResult .waiting {
+            width: 160px;
+            padding: 10px;
+            background-color: #3B86FF;
+            color: #fff; }
+      .pendingOrderList .pendingOrders .pendingOrder .prodImage {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 300px; }
+        .pendingOrderList .pendingOrders .pendingOrder .prodImage img {
+          width: 280px; }
+
+.roleTitle {
+  font-weight: bold; }
+
+.roleEmail {
+  color: #7d7d7d; }
+
+.cancelBtn {
+  background-color: #E84343;
+  padding: 10px 50px;
+  color: #fff;
+  cursor: pointer;
+  transition: all .2s ease-in-out; }
+  .cancelBtn:hover {
+    background-color: #b93535; }
+
+.acceptBtn {
+  background-color: #3B86FF;
+  padding: 10px 50px;
+  color: #fff;
+  cursor: pointer;
+  transition: all .2s ease-in-out; }
+  .acceptBtn:hover {
+    background-color: #326cca; }
 
 /*Vars*/
 /*RWD*/

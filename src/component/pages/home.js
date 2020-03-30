@@ -11,6 +11,8 @@ import Box from '@material-ui/core/Box';
 import Map from './../googleMap'
 import GlobalOrder from './../globalOrder'
 import PostRequest from './../postRequest'
+import AllPending from '../pending'
+import AllComplete from '../Complete'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -70,6 +72,19 @@ function Homepage() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const tabChange = e =>{
+    const tabs = document.querySelector('#tabs')
+    const panels = document.querySelectorAll('.tabPanel')
+    if(e.target.innerText !== 'NEAR ORDERS'){
+      console.log('width==0')
+      document.getElementsByClassName('map')[0].style.display='none'
+      document.getElementById('mainTab').style.width='100%'
+    }else{
+      console.log('width==100%')
+      document.getElementsByClassName('map')[0].style.display='block'
+      document.getElementById('mainTab').style.width='840px'
+    }
+  }
  
 
   useEffect(() => {
@@ -85,24 +100,24 @@ function Homepage() {
         {/* {showLoading && <Spinner animation="border" role="status">
                     <span>Loading...</span>
                 </Spinner> } */}
-      <div className={classes.root}>
+      <div id='mainTab' className={classes.root}>
         <AppBar className={classesTabs.root} position="static">
-          <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+          <Tabs id='tabs' value={value} onChange={handleChange} aria-label="simple tabs example">
            
-            <Tab label="Near Orders" {...a11yProps(0)} />
-            <Tab label="Pending Orders" {...a11yProps(1)} />
-            <Tab label="Completed Orders" {...a11yProps(2)} />
+            <Tab onClick={tabChange} label="Near Orders" {...a11yProps(0)} />
+            <Tab onClick={tabChange} label="Pending Orders" {...a11yProps(1)} />
+            <Tab onClick={tabChange} label="Completed Orders" {...a11yProps(2)} />
           </Tabs>
         </AppBar>
         <TabPanel value={value} index={0} className='tabPanel'>
           <PostRequest/>              
           <GlobalOrder order={data} />
         </TabPanel>
-        <TabPanel value={value} index={1}>
-          Item Two
+        <TabPanel value={value} index={1} className='tabPanel'>
+          <AllPending/>
         </TabPanel>
-        <TabPanel value={value} index={2}>
-          Item Three
+        <TabPanel value={value} index={2} className='tabPanel'>
+          <AllComplete />
         </TabPanel>
        
       </div>

@@ -1,3 +1,88 @@
+.completedOrderList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 920px;
+  margin: auto; }
+  .completedOrderList .completedOrders {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0em 1em;
+    width: 100%; }
+    .completedOrderList .completedOrders li {
+      list-style-type: none; }
+    .completedOrderList .completedOrders .completedOrder {
+      display: flex;
+      flex-direction: row;
+      height: 350px;
+      width: 100%;
+      background-color: #fff;
+      margin: 1em 0em;
+      padding: 1em;
+      box-sizing: border-box;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+      .completedOrderList .completedOrders .completedOrder .completedDetail {
+        display: flex;
+        flex-direction: column;
+        width: 620px; }
+        .completedOrderList .completedOrders .completedOrder .completedDetail .completedTitle {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          border-bottom: 1px solid #000; }
+          .completedOrderList .completedOrders .completedOrder .completedDetail .completedTitle .completedStatus {
+            font-weight: bold; }
+          .completedOrderList .completedOrders .completedOrder .completedDetail .completedTitle .completedRoleBuyer {
+            color: #C60000; }
+          .completedOrderList .completedOrders .completedOrder .completedDetail .completedTitle .completedRoleSeller {
+            color: #00B407; }
+        .completedOrderList .completedOrders .completedOrder .completedDetail .completedContent {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          text-align: left;
+          padding-top: 10px;
+          height: 100%; }
+          .completedOrderList .completedOrders .completedOrder .completedDetail .completedContent .buyer {
+            display: flex;
+            flex-direction: row;
+            align-items: center; }
+            .completedOrderList .completedOrders .completedOrder .completedDetail .completedContent .buyer img {
+              width: 50px;
+              margin-right: 10px; }
+          .completedOrderList .completedOrders .completedOrder .completedDetail .completedContent .completedMoreDetail {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between; }
+            .completedOrderList .completedOrders .completedOrder .completedDetail .completedContent .completedMoreDetail .roleAmt {
+              color: #7d7d7d; }
+            .completedOrderList .completedOrders .completedOrder .completedDetail .completedContent .completedMoreDetail .buyerInfo {
+              display: flex;
+              flex-direction: column;
+              justify-content: space-evenly;
+              height: 100%;
+              width: 35%; }
+              .completedOrderList .completedOrders .completedOrder .completedDetail .completedContent .completedMoreDetail .buyerInfo p {
+                margin: 0px; }
+            .completedOrderList .completedOrders .completedOrder .completedDetail .completedContent .completedMoreDetail .redarrow {
+              height: 25px; }
+            .completedOrderList .completedOrders .completedOrder .completedDetail .completedContent .completedMoreDetail .sellerInfo {
+              display: flex;
+              flex-direction: column;
+              justify-content: space-evenly;
+              height: 100%;
+              width: 35%; }
+              .completedOrderList .completedOrders .completedOrder .completedDetail .completedContent .completedMoreDetail .sellerInfo p {
+                margin: 0px; }
+      .completedOrderList .completedOrders .completedOrder .prodImage {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 300px; }
+        .completedOrderList .completedOrders .completedOrder .prodImage img {
+          width: 280px; }
+
 /*Vars*/
 /*RWD*/
 /*Mixins*/
@@ -381,6 +466,10 @@ input[type=search]:focus {
               .homeContainer .orderList .orders .order .upperdetail .orderDetail .tradeContent .prodAmount {
                 margin: 0px;
                 color: #a0a0a0; }
+              .homeContainer .orderList .orders .order .upperdetail .orderDetail .tradeContent .tradeRequest {
+                width: 35%; }
+              .homeContainer .orderList .orders .order .upperdetail .orderDetail .tradeContent .wishProd {
+                width: 35%; }
             .homeContainer .orderList .orders .order .upperdetail .orderDetail .prodDescription {
               text-align: left; }
         .homeContainer .orderList .orders .order .prodImage {

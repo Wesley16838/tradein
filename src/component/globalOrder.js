@@ -49,7 +49,7 @@ function GlobalOrder(props) {
                                         </div>
                                         <p>{item.description}</p>
                                     </div>
-                                    <button className='basicBtn' onClick={e => handleclick(item)}>Help</button>
+                                    {item.user._id!=localStorage.getItem("userId")?<button className='basicBtn' onClick={e => handleclick(item)}>Help</button>:<div></div>}
                             </div>
                            
                             
